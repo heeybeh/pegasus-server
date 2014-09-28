@@ -4,7 +4,12 @@ module.exports = {
     port: 5000,
     logging: {
         name: 'application_server',
-        level: 'info'
+        streams: [{
+            type: 'rotating-file',
+            path: './log/pegasus-as.log',
+            period: '1d',
+            count: 7
+        }]
     },
     core: {
         bus: {
