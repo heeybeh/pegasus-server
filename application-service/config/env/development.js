@@ -3,12 +3,15 @@
 module.exports = {
     port: 5000,
     logging: {
-        console: true,
-        logstash: false
+        name: 'application_server',
+        level: 'info'
     },
-    bus: {
-        pis : {
-            endpoint: 'integration-service-websocket-endpoint-url'
+    core: {
+        bus: {
+            endpoint: "ws://integration-service-url"
+        },
+        logging: {
+            name: 'core'
         }
     }
 };
