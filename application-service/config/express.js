@@ -7,16 +7,17 @@ var morgan = require('morgan'),
     errorHandler = require('errorhandler');
 
 
-module.exports = function(app) {
+module.exports = function(app, cfg) {
     
     // saving app context to centralize these settings
     app.set('target_env', process.env.NODE_ENV);
-    app.set('http_port', process.env.PORT || global.config.port);
+    app.set('http_port', process.env.PORT || cfg.http.port);
+    app.set('https_port', process.env.PORT || cfg.https.port);
     
     // Only use logger for development environment
     if  ('development' === app.get('target_env')) {
         app.use(morgan('dev'));
-        app.use(errorHandler());
+        app.use(require('express-bunyan-logger')(cfg.logging));
     }    
     
     // general expres app configurations

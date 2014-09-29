@@ -13,8 +13,6 @@ exports.createChild = function (cfg, parentLogger) {
     logcfg.widget_type = logcfg.name;
     delete logcfg.name;
 
-    console.log(logcfg);
-    
     return parentLogger.child(logcfg);
 };
 
