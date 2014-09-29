@@ -18,8 +18,6 @@ logger.info('Starting server blocks...');
 var core = require('./app/core.js')(global.config.core, logger);
 core.init();
 
-
-
 // TODO: elastic system
 // TODO: couchdb connection
 
@@ -28,7 +26,10 @@ core.init();
 var router = require('./app/router/router.js')(global.config.router, logger);
 router.init(require('./config/express.js'));
 
-// TODO: load NBAPI
+// loading NBAPI
+router.loadAPI('/app/nbapi/routes');
+
+
 // TODO: bypass api
 
 
