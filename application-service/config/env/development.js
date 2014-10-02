@@ -1,6 +1,7 @@
 /* jslint node: true */
 'use strict';
 module.exports = {
+    debug: true,
     logging: {
         name: 'application_server',
         streams: [
@@ -24,6 +25,9 @@ module.exports = {
         }
     },
     router: {
+        logging: {
+            name: 'pas-router'
+        },    
         http: {
             enabled: true,
             port: 5000      // RFC default is 80
@@ -41,9 +45,6 @@ module.exports = {
                     path: 'sslcert/server.crt'
                 }                
             }
-        },    
-        logging: {
-            name: 'pas-router'
         }
     }
 };
