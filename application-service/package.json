@@ -1,11 +1,11 @@
 {
   "name": "PEGASUS-AS",
-  "version": "0.1.0",
-  "description": "Pegasus Application Server",
+  "version": "0.2.0",
+  "description": "Pegasus Application Service",
   "main": "server.js",
   "scripts": {
-    "test": "grunt test",
-    "start": "node server.js"
+    "test": "gulp test",
+    "build": "gulp all"
   },
   "repository": {
     "type": "git",
@@ -13,22 +13,12 @@
   },
   "author": "Vinicius Linck",
   "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.9.0",
-    "bunyan": "^1.1.3",
-    "couchbase": "^2.0.0",
-    "errorhandler": "^1.2.0",
-    "express": "^4.9.5",
-    "express-bunyan-logger": "^1.1.0",
-    "lodash": "^2.4.1",
-    "method-override": "^2.2.0",
-    "morgan": "^1.3.1",
-    "serve-favicon": "^2.1.5"
-  },
+  "readmeFilename": "README.md",
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-jslint": "^1.1.12"
+    "gulp": "~3.8.10",
+    "del": "~1.1.1",
+    "gulp-jslint": "~0.2.1",
+    "gulp-jshint": "~1.9.0",
+    "jshint-stylish": "~1.0.0"
   }
 }
