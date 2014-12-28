@@ -1,4 +1,22 @@
-var SRC_CODE = [ 'server.js' ], gulp = require('gulp'), del = require('del'), jshint = require('gulp-jshint'), jslint = require('gulp-jslint');
+// FUTURE: check about different configurations for lint, hint and mocha based on build purposal.
+var SRC_CODE = [ 'server.js' ], 
+	gulp = require('gulp'), 
+	del = require('del'), 
+	jshint = require('gulp-jshint'), 
+	jslint = require('gulp-jslint'),
+	mocha = require('gulp-mocha');
+
+// TODO: check about mocha-lcov-reporter and multiple reporters.
+gulp.task('test:unit', function() {
+	
+	return gulp.src(['test/unit/**/test-*.js'], {read: false})
+	.pipe(mocha({
+		reporter: 'nyan'
+	}));
+	
+});
+
+gulp.task('test', [ 'test:unit' ]);
 
 gulp.task('lint', function() {
 	return gulp.src(SRC_CODE)
@@ -55,6 +73,5 @@ gulp.task('clean', function(cb) {
 	del('dist', cb);
 });
 
-gulp.task('all', [ 'clean', 'hint', 'lint' ]);
-
+gulp.task('all', [ 'clean', 'hint', 'lint', 'test' ]);
 gulp.task('default', [ 'all' ]);
