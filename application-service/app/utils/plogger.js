@@ -1,24 +1,17 @@
-var _ = require('lodash'),
-    bunyan = require("bunyan");
+function PegasusLogger(logSystem) {
+	this.logSys = logSystem;
+}
 
-exports.createLogger = function (cfg) {
-    return bunyan.createLogger(cfg);
-};
-
-exports.createChild = function (cfg, parentLogger) {
-    
-    var logcfg = _.extend({widget_type: ''}, cfg);
-    
-    logcfg.widget_type = logcfg.name;
-    delete logcfg.name;
-
-    return parentLogger.child(logcfg);
-};
-
-exports.getLogger = function (cfg, parentLogger) {
+PegasusLogger.prototype.getLogger = function (cfg, parentLogger) {
     return (
         parentLogger ?  
-        this.createChild(cfg, parentLogger) :
-        this.createLogger(cfg)
+        this.logSys.child(cfg, parentLogger) :
+        this.logSys.create(cfg)
     );
 };
+
+function setup (logSystem) {
+	return new PegasusLogger(require('./logging/' + logSystem)); 
+}
+
+module.exports = setup;

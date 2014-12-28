@@ -11,7 +11,8 @@ gulp.task('test:unit', function() {
 	
 	return gulp.src(['test/unit/**/test-*.js'], {read: false})
 	.pipe(mocha({
-		reporter: 'nyan'
+		reporter: 'spec',				// http://mochajs.org/#reporters
+		timeout: 200
 	}));
 	
 });
