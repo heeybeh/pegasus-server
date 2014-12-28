@@ -1,8 +1,11 @@
 var _ = require('lodash');
-var bunyan = require('bunyan');
+
+exports.getRawFw = function () {
+	return require('bunyan');
+};
 
 exports.create = function(cfg) {
-	return bunyan.createLogger(cfg);
+	return this.getRawFw.createLogger(cfg);
 };
 
 exports.child = function(cfg, parentLogger) {
