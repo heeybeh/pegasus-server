@@ -5,7 +5,7 @@ exports.getRawFw = function () {
 };
 
 exports.create = function(cfg) {
-	return this.getRawFw.createLogger(cfg);
+	return this.getRawFw().createLogger(cfg);
 };
 
 exports.child = function(cfg, parentLogger) {
