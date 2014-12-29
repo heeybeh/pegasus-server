@@ -1,7 +1,6 @@
 describe('plogger-bunyan', function () {
 	var logsys, mocked, instance;
 	var _ = require('lodash');
-	var assert = require('assert');
 	var expect = require('expect.js');
 	var sinon = require('sinon');
 
@@ -46,9 +45,9 @@ describe('plogger-bunyan', function () {
 			var cfg = 'my-config';
 			var result = logsys.create(cfg);
 			
-			assert(logsys.getRawFw.calledOnce);
-			assert(mocked.createLogger.calledWith(cfg));
-			assert.equal(result, instance, 'is not creating the logger instance properly.');
+			expect(logsys.getRawFw.calledOnce).to.be.ok();
+			expect(mocked.createLogger.calledWith(cfg)).to.be.ok();
+			expect(result).to.equal(instance);
 		});
 	});
 
