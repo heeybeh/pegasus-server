@@ -1,23 +1,46 @@
-// FUTURE: check about different configurations for lint, hint and mocha based on build purposal.
+//FUTURE: check about different configurations for lint, hint and mocha based on build purposal.
 var SRC_CODE = [ 'server.js' ], 
-	gulp = require('gulp'), 
-	del = require('del'), 
-	jshint = require('gulp-jshint'), 
-	jslint = require('gulp-jslint'),
-	mocha = require('gulp-mocha');
+gulp = require('gulp'), 
+del = require('del'), 
+jshint = require('gulp-jshint'), 
+jslint = require('gulp-jslint'),
+mocha = require('gulp-mocha'),
+istanbul = require('gulp-istanbul');
 
-// TODO: check about mocha-lcov-reporter and multiple reporters.
-gulp.task('test:unit', function() {
-	
-	return gulp.src(['test/unit/**/test-*.js'], {read: false})
-	.pipe(mocha({
-		reporter: 'spec',
-		timeout: 200
-	}));
-	
+
+gulp.task('test:unit', function(cb) {
+
+	return gulp.src(['./app/**/*.js', './server.js'])
+
+	// instrumenting with istanbul
+	.pipe(istanbul({
+		includeUntested: true
+	}))
+	.pipe(istanbul.hookRequire())
+	.on('finish', function () {
+		
+		// covering with mocha
+		gulp.src(['test/unit/**/test-*.js'])
+		.pipe(mocha({
+			reporter: 'spec',
+			timeout: 200
+		}))
+
+		// writing reports - https://github.com/SBoudrias/gulp-istanbul
+		.pipe(istanbul.writeReports({
+			dir: './build/coverage',
+			reporters: [ 'text', 'text-summary', 'html','lcov', 'json' ],
+			reportOpts: { dir: './build/coverage' }
+		}));
+
+	});
 });
 
+
 gulp.task('test', [ 'test:unit' ]);
+
+
+
 
 gulp.task('lint', function() {
 	return gulp.src(SRC_CODE)
@@ -52,16 +75,20 @@ gulp.task('lint', function() {
 		// for built-in reporter
 		errorsOnly: false	
 	}))
-	    // error handling:
-        // to handle on error, simply
-        // bind yourself to the error event
-        // of the stream, and use the only
-        // argument as the error object
-        // (error instanceof Error)
-        .on('error', function (error) {
-            console.error(String(error));
-        });
+	// error handling:
+	// to handle on error, simply
+	// bind yourself to the error event
+	// of the stream, and use the only
+	// argument as the error object
+	// (error instanceof Error)
+	.on('error', function (error) {
+		console.error(String(error));
+	});
 });
+
+
+
+
 
 gulp.task('hint', function() {
 	return gulp.src(SRC_CODE)
@@ -70,9 +97,15 @@ gulp.task('hint', function() {
 	.pipe(jshint.reporter('fail'));
 });
 
+
+
+
 gulp.task('clean', function(cb) {
-	del('dist', cb);
+	del(['build', 'dist'], cb);
 });
+
+
+
 
 gulp.task('all', [ 'clean', 'hint', 'lint', 'test' ]);
 gulp.task('default', [ 'all' ]);
