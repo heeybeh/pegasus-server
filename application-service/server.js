@@ -6,7 +6,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 global.config = require('./config/all.js');
 
 // ***** Starting Server Modules *****
-var plogger = require('./app/utils/plogger.js')(global.config.logSystem); 
+var plogger = require('./app/utils/plogger.js')(global.config.logSystem);
 var logger = plogger.getLogger(global.config.logging);
 logger.info('Starting server blocks...');
 
