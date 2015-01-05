@@ -15,6 +15,7 @@ describe('plogger-bunyan', function () {
 		// mocked module
 		mocked = {};
 		mocked.createLogger = sinon.stub().returns(instance);
+		mocked.child = sinon.stub().returns(instance);
 	});
 
 	
@@ -53,9 +54,16 @@ describe('plogger-bunyan', function () {
 
 	
 	
-	describe('#child()', function () {
-		it('should...', function () {
+	describe('#child()', function () {		
+		it('should create a child log object', function () {
+			var cfg = {"name": "cfg-name"};
+			var exp = {"widget_type": "cfg-name"};
 			
+			var result = logsys.child(cfg, mocked);
+			
+			expect(mocked.child.calledOnce).to.be.ok();
+			expect(mocked.child.calledWith(exp)).to.be.ok();
+			expect(result).to.equal(instance);
 		});
 	});
 });
