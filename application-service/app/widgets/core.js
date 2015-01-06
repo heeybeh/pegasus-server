@@ -16,10 +16,6 @@ PegasusCore.prototype.init = function () {
 };
 
 /* istanbul ignore next */
-function setup (cfg, parentLogger) {
-	var plogger = require('./utils/plogger.js')(cfg.log_proxy);
-    var logger = plogger.getLogger(cfg.logging, parentLogger);
-    return new PegasusCore(cfg, logger);
-}
-
-module.exports = setup;
+module.exports = function (cfg, parentLogger) {
+	return new PegasusCore(cfg, parentLogger);
+};
