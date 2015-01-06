@@ -10,7 +10,7 @@ istanbul = require('gulp-istanbul');
 
 gulp.task('test:unit', function(cb) {
 
-	return gulp.src(['./app/**/*.js', './server.js'])
+	return gulp.src(['./app/**/*.js', './launcher.js'])
 
 	// instrumenting with istanbul
 	.pipe(istanbul({
@@ -28,9 +28,9 @@ gulp.task('test:unit', function(cb) {
 
 		// writing reports - https://github.com/SBoudrias/gulp-istanbul
 		.pipe(istanbul.writeReports({
-			dir: './build/coverage',
+			dir: './build/pegasus-as/coverage',
 			reporters: [ 'text', 'text-summary', 'html','lcov', 'json' ],
-			reportOpts: { dir: './build/coverage' }
+			reportOpts: { dir: './build/pegasus-as/coverage' }
 		}));
 
 	});

@@ -1,15 +1,11 @@
-// Setting node environment vars in case they are not set
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+// This is a launcher wrapper only.
+// Not supposed to contain any further code or logic.
+// If you think about putting any code here, please tell to the team before doing anything stupid.
 
-// ***** LOADING GLOBALS *****
-// NOTE: Avoid having too much objects in global context.
-global.config = require('./config/all.js');
-
-// ***** Starting Server Modules *****
-var plogger = require('./app/utils/plogger.js')(global.config.logSystem);
-var logger = plogger.getLogger(global.config.logging);
-logger.info('Starting server blocks...');
-
-// core block
-// var core = require('./app/core.js')(global.config.core, logger);
-// core.init();
+try {
+	var launcher = require('./launcher');
+	launcher.start();
+} catch(err) {
+	console.log(err);
+    process.exit(-1);
+}
