@@ -3,5 +3,5 @@ var path = require('path'),
 
 module.exports = {
     root: rootPath,
-    logSystem: 'plogger-bunyan'
+    log_proxy: 'plogger-bunyan'
 };

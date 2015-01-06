@@ -2,7 +2,6 @@ module.exports = {
 
 	// debug switch
 	debug : true,
-	log_proxy: 'plogger-bunyan',
 
 	// general logging config
 	logging : {

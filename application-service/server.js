@@ -4,8 +4,11 @@
 
 try {
 	var launcher = require('./launcher');
-	launcher.start();
+	launcher.bootstrap('./config/all');
 } catch(err) {
 	console.log(err);
     process.exit(-1);
+} finally {
+    // exporting app to node context
+	//exports = module.exports = launcher.getServerContext();
 }
