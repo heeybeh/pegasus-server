@@ -10,5 +10,5 @@ try {
     process.exit(-1);
 } finally {
     // exporting app to node context
-	//exports = module.exports = launcher.getServerContext();
+	exports = module.exports = launcher.getServerContext();
 }

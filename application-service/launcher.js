@@ -1,4 +1,4 @@
-var core, logger;
+var core, logger, plogger_factory ;
 
 // set Node process vars in case they are not set
 // target environment: development | qa (tst) | homologation (pp) | production
@@ -16,8 +16,10 @@ exports.load_globals = function (settings_file) {
 
 //
 exports.init_logging = function (settings) {
-	var plogger = require('./app/utils/plogger.js')(settings.log_proxy);
-	var log_obj = plogger.getLogger(settings.logging);
+	var log_obj;
+	
+	plogger_factory = require('./app/utils/plogger.js')(settings.log_proxy);
+	log_obj = plogger_factory.getLogger(settings.logging);
 	
 	log_obj.info('Log system has been started...');
 	return log_obj;	
@@ -25,7 +27,13 @@ exports.init_logging = function (settings) {
 
 
 // 
-exports.init_core = function (settings, mainLogger) {
+exports.loadWidget = function (settings, mainLogger) {
+};
+
+
+//
+exports.getServerContext = function () {
+	return null;
 };
 
 // launch application server
@@ -41,8 +49,8 @@ exports.bootstrap = function (settings_file){
 		logger.info('Starting server blocks...');
 		
 		// core block
-		core = this.init_core(global.config.widgets.core, logger);
-		//
+		//core = this.loadWidget(global.config.widgets, 'core', logger);
+		
 		
 	} catch (err) {
 	    logger.fatal(err);
