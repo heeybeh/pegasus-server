@@ -7,7 +7,7 @@ describe('plogger-bunyan', function () {
 
 	before('@before', function () {
 		// pure log object
-		logsys = require('../../../../../app/utils/logging/plogger-bunyan');
+		logsys = require('../../../../app/utils/plogger-bunyan');
 		
 		//mocked instance
 		instance = {};

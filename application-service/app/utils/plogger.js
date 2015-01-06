@@ -1,3 +1,5 @@
+var path = require('path');
+
 function PegasusLogger(logSystem) {
 	this.logSys = logSystem;
 }
@@ -10,8 +12,10 @@ PegasusLogger.prototype.getLogger = function (cfg, parentLogger) {
     );
 };
 
+/* istanbul ignore next */
 function setup (logSystem) {
-	return new PegasusLogger(require('./logging/' + logSystem)); 
+	var framework = path.resolve(__dirname) + '/' + logSystem;
+	return new PegasusLogger(require(framework)); 
 }
 
 module.exports = setup;
