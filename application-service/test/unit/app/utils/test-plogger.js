@@ -2,7 +2,6 @@ describe('plogger', function () {
 	var logger;
 	var expect = require('expect.js');
 	var sinon = require('sinon');
-	
 
 	before('@before', function () {
 		// logger object
@@ -26,9 +25,6 @@ describe('plogger', function () {
 		});
 		
 		it('should create a parent logger', function () {
-			
-			console.log(logger.logSys);
-			
 			logger.getLogger();
 			
 			expect(logger.logSys.create.calledOnce).to.be.ok();
@@ -36,8 +32,6 @@ describe('plogger', function () {
 		});
 		
 		it('should create a child logger', function () {
-			
-			console.log(logger.logSys);
 			
 			logger.getLogger('fake-cfg-object', 'fake-parent-object');
 			
