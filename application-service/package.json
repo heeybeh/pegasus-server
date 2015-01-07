@@ -5,6 +5,7 @@
 	"main": "server.js",
 	"scripts": {
 		"start":"node server.js | ./node_modules/bunyan/bin/bunyan",
+		"stop":"pkill --signal SIGINT TLANTIC-PAS", 
 		"test": "gulp test",
 		"build": "gulp all",
 		"clean": "gulp clean"
