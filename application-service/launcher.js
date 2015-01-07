@@ -77,6 +77,8 @@ exports.bootstrap = function (settings_file){
 		core   = this.loadWidget(global.config.widgets, 'core', logger);
 		core.init();
 
+		// TODO: elastic system
+		// TODO: couchdb connection
 		// router widget
 		router   = this.loadWidget(global.config.widgets, 'router', logger);
 		router.init(require('./config/express'));
@@ -84,7 +86,10 @@ exports.bootstrap = function (settings_file){
 		// loading NBAPI
 		router.loadAPI('/app/nbapi/routes');
 
-		// starting app
+		// TODO: bypass api
+		
+		// ***** Start the app by listening on <port> *****
+		// NOTE: The Http Port is set on config file, based on each target environment (development, test, etc...)
 		router.start();
 		logger.info('Pegasus Application Server is up and flying...');
 
