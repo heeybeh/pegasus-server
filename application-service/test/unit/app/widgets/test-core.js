@@ -5,14 +5,14 @@ describe('core', function () {
 	
 	before('@before', function () {
 		// core object
-		core = require('../../../app/core')({
+		core = require('../../../../app/widgets/core')({
 			log_proxy: 'plogger-bunyan',
 			logging: {
 				name: 'core-unit-test',
 				streams: []
 			}
 		});
-		
+
 		// mocking logger
 		core.logger = {
 				info: sinon.spy(),
@@ -22,7 +22,7 @@ describe('core', function () {
 	
 	describe('#setup()', function () {
 		it('should return an object', function () {
-			var target = require('../../../app/core');
+			var target = require('../../../../app/widgets/core');
 			
 			expect(target).not.to.be(undefined);
 			expect(target).not.to.be(null);
